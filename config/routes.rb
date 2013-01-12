@@ -1,9 +1,18 @@
 SampleApp::Application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'
 
   match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
+  #signin_path => '/signin'
+  #signin_url => 'http://localhost:3000/signin'
+  #
+  #signout_path => '/signout'
+  #signout_url => 'http://localhost:3000/signout'
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
